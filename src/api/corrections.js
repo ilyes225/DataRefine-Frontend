@@ -4,11 +4,11 @@ export const correctionsAPI = {
   getAll: (filters = {}) =>
     apiClient.get('/corrections/', { params: filters }),
 
-  approve: (id) =>
-    apiClient.put(`/corrections/${id}/approve`),
+  approve: (id, comment = null) =>
+    apiClient.put(`/corrections/${id}/approve`, { comment }),
 
-  reject: (id) =>
-    apiClient.put(`/corrections/${id}/reject`),
+  reject: (id, comment = null) =>
+    apiClient.put(`/corrections/${id}/reject`, { comment }),
 
   updateValue: (id, suggestedValue) =>
     apiClient.put(`/corrections/${id}/update-value`, { suggested_value: suggestedValue }),

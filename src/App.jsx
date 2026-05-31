@@ -10,10 +10,27 @@ import Reports from './pages/Reports'
 import Settings from './pages/Settings'
 import Register from './pages/Register'
 import VerifyEmail from './pages/VerifyEmail'
+import UserManagement from './pages/UserManagement'
+import Notifications from './pages/Notifications'
+import PendingAssignment from './pages/PendingAssignment'
 
-function PrivateRoute({ children }) {
+function PrivateRoute({ children, user }) {
   const token = localStorage.getItem('token')
-  return token ? children : <Navigate to="/login" />
+  if (!token) return <Navigate to="/login" />
+
+  // Consultant non assigné → page d'attente
+  if (user && user.role === 'consultant' && !user.is_assigned) {
+    return <PendingAssignment />
+  }
+
+  return children
+}
+
+function AdminRoute({ children, user }) {
+  const token = localStorage.getItem('token')
+  if (!token) return <Navigate to="/login" />
+  if (!user || user.role !== 'admin') return <Navigate to="/" />
+  return children
 }
 
 function AppRoutes() {
@@ -39,15 +56,23 @@ function AppRoutes() {
 
   return (
     <Routes>
+      {/* Public */}
       <Route path="/login" element={<Login onLogin={handleLogin} />} />
       <Route path="/register" element={<Register onLogin={handleLogin} />} />
       <Route path="/verify-email" element={<VerifyEmail />} />
-      <Route path="/" element={<PrivateRoute><Layout {...layoutProps}><Dashboard /></Layout></PrivateRoute>} />
-      <Route path="/anomalies" element={<PrivateRoute><Layout {...layoutProps}><Anomalies /></Layout></PrivateRoute>} />
-      <Route path="/sources" element={<PrivateRoute><Layout {...layoutProps}><Sources /></Layout></PrivateRoute>} />
-      <Route path="/corrections" element={<PrivateRoute><Layout {...layoutProps}><Corrections /></Layout></PrivateRoute>} />
-      <Route path="/reports" element={<PrivateRoute><Layout {...layoutProps}><Reports /></Layout></PrivateRoute>} />
-      <Route path="/settings" element={<PrivateRoute><Layout {...layoutProps}><Settings /></Layout></PrivateRoute>} />
+
+      {/* Protected — tous les utilisateurs assignés */}
+      <Route path="/" element={<PrivateRoute user={user}><Layout {...layoutProps}><Dashboard /></Layout></PrivateRoute>} />
+      <Route path="/anomalies" element={<PrivateRoute user={user}><Layout {...layoutProps}><Anomalies /></Layout></PrivateRoute>} />
+      <Route path="/sources" element={<PrivateRoute user={user}><Layout {...layoutProps}><Sources /></Layout></PrivateRoute>} />
+      <Route path="/corrections" element={<PrivateRoute user={user}><Layout {...layoutProps}><Corrections /></Layout></PrivateRoute>} />
+      <Route path="/reports" element={<PrivateRoute user={user}><Layout {...layoutProps}><Reports /></Layout></PrivateRoute>} />
+      <Route path="/settings" element={<PrivateRoute user={user}><Layout {...layoutProps}><Settings /></Layout></PrivateRoute>} />
+      <Route path="/notifications" element={<PrivateRoute user={user}><Layout {...layoutProps}><Notifications /></Layout></PrivateRoute>} />
+
+      {/* Admin only */}
+      <Route path="/users" element={<AdminRoute user={user}><Layout {...layoutProps}><UserManagement /></Layout></AdminRoute>} />
+
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   )

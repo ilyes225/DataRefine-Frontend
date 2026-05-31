@@ -7,6 +7,7 @@ const en = {
     sources: 'Sources',
     reports: 'Reports',
     settings: 'Settings',
+    userManagement: 'Users',
   },
 
   // ── NAVBAR ───────────────────────────────────────────────────────
@@ -85,6 +86,11 @@ const en = {
   anomalies: {
     title: 'Detected Anomalies',
     refresh: '🔄 Refresh',
+    analyze: 'Analyze Dataset',      
+    analyzing: 'Analyzing…',  
+    analyzeSuccess: 'Analysis completed successfully.',
+    selectSourceFirst: 'Please select a source first.',
+    analyzeFailed: 'Analysis failed. Please try again.',
     total: 'anomaly(ies) total',
     empty: 'No anomalies found',
     filters: {
@@ -94,6 +100,7 @@ const en = {
       pending: 'Pending',
       approved: 'Approved',
       rejected: 'Rejected',
+      sourceLabel: 'Source',
     },
     types: {
       duplicate: 'Duplicate',
@@ -146,6 +153,8 @@ const en = {
   corrections: {
     title: 'Corrections',
     refresh: '🔄 Refresh',
+    total: 'corrections',
+
     export: {
       title: '⬇️ Download corrected file',
       onlyApproved: 'Only datasets with approved corrections are available.',
@@ -203,6 +212,11 @@ const en = {
       phone_normalize: 'Phone normalization',
       date_normalize: 'Date normalization',
       isolation_forest_median: 'Isolation Forest (median)',
+      iqr_median: 'IQR Median',
+      unrecoverable_email: 'Unrecoverable email',
+      phone_normalization: 'Phone normalization',
+      median_imputation: 'Median Imputation',
+      mode_imputation: 'Mode imputation',
     },
     modal: {
       title: '✏️ Manual correction',
@@ -404,6 +418,156 @@ const en = {
     },
     loading: 'Loading...',
   },
+  // ── NOTIFICATIONS ─────────────────────────────────────────────────
+  notifications: {
+    title: 'Notifications',
+    markAllRead: 'Mark all as read',
+    clear: 'Clear all',
+    empty: 'No notifications',
+    filters: {
+      all: 'All',
+      unread: 'Unread',
+      anomalies: 'Anomalies',
+      ml: 'ML Analysis',
+      
+    },
+  },
+
+  // ── USER MANAGEMENT ───────────────────────────────────────────────
+users: {
+    title: 'User Management',
+    subtitle: 'Manage roles, projects and imports for each user',
+    refresh: 'Refresh',
+    tabs: {
+      users: 'Users',
+      clients: 'Projects',
+    },
+    table: {
+      username: 'Name',
+      email: 'Email',
+      role: 'Role',
+      status: 'Status',
+      clients: 'Projects',
+      actions: 'Actions',
+    },
+    roles: {
+      admin: 'Admin',
+      consultant: 'Consultant',
+    },
+    actions: {
+      promote: 'Promote',
+      demote: 'Demote',
+      you: 'you',
+    },
+    projects: {
+      title: 'Projects',
+      newClient: 'New project',
+      createTitle: 'Create a new project',
+      nameLabel: 'Project name',
+      namePlaceholder: 'e.g. EDF Data Q1',
+      domainLabel: 'Domain',
+      domainPlaceholder: 'e.g. edf.fr',
+      createButton: 'Create',
+      creating: 'Creating...',
+      cancel: 'Cancel',
+      members: 'Members',
+      assignPlaceholder: 'Assign a consultant...',
+      assignButton: 'Assign',
+      noMembers: 'No consultants assigned',
+      deleteConfirm: (name) => `Delete project "${name}"? All consultants will be unassigned.`,
+      unassignConfirm: (name) => `Remove ${name} from this project?`,
+      assigned: (n) => `${n} consultant${n > 1 ? 's' : ''} assigned`,
+    },
+  },
+
+  // ── PENDING ASSIGNMENT ────────────────────────────────────────────
+  pending: {
+    title: 'Waiting for Assignment',
+    subtitle: 'Your account has been created and verified. Please wait for an administrator to assign you to a project.',
+    hint: 'If you have been waiting too long, contact your administrator.',
+    logout: 'Sign out',
+  },
+  // EN
+register: {
+  title: 'Create your account',
+  subtitle: 'Join DataRefine today',
+  username: 'USERNAME',
+  email: 'EMAIL',
+  password: 'PASSWORD',
+  usernamePlaceholder: 'johndoe',
+  emailPlaceholder: 'john@example.com',
+  passwordPlaceholder: '••••••••',
+  submit: 'Create Account',
+  loading: 'Creating account…',
+  alreadyAccount: 'Already have an account?',
+  login: 'Login',
+  errorDefault: 'Registration failed',
+  successTitle: 'Check your email',
+  successText: 'A verification email has been sent to',
+  successText2: 'Click the link in the email to activate your account.',
+  goToLogin: 'Go to Login',
+},
+
+verifyEmail: {
+  loadingTitle: 'Verifying…',
+  loadingSubtitle: 'Validating your email…',
+  successTitle: 'Email verified',
+  successText: 'Your account is activated. You can now sign in.',
+  successButton: 'Sign in',
+  errorTitle: 'Verification failed',
+  errorTokenMissing: 'Missing token.',
+  errorDefault: 'Verification error.',
+  retryButton: 'Try again',
+},
+teamPanel: {
+  title: 'My team',
+  empty: 'No team assigned',
+  onlyMember: 'You are the only member',
+},
+dashboard: {
+  title: 'Dashboard',
+  hello: 'Hello',
+  newSource: 'New Source',
+  trendTitle: 'Detection trend',
+  trendDays: 'Last 7 days',
+  trendEmpty: 'No detections in the last 7 days',
+  trendLaunch: 'Run analysis',
+  seeAll: 'See all',
+  pendingCorrections: 'Pending corrections',
+  allDone: 'All done!',
+  allDoneSub: (n) => `${n} approved corrections`,
+  moreCorrections: (n) => `+ ${n} more corrections →`,
+  mlBannerTitle: 'Ready to analyze your data?',
+  mlBannerSub: 'Your ML model is on standby. Select a source and launch automatic anomaly detection.',
+  mlBannerBtn: 'Run analysis',
+  loadingText: 'Loading dashboard…',
+  excellent: 'Excellent',
+  average: 'Average',
+  critical: 'Critical',
+  linesCount: 'lines',
+  kpi: {
+    anomalies: 'Total Anomalies',
+    anomaliesSub: 'Automatically detected',
+    quality: 'Quality Score',
+    qualitySub: 'Data quality score',
+    sources: 'Sources',
+    corrections: 'Corrections',
+    correctionsSub: 'approved',
+  },
+  breakdown: {
+    title: 'Anomaly Breakdown',
+    empty: 'No anomalies detected',
+    duplicates: '🔁 Duplicates',
+    outliers: '📈 Outliers',
+    missing: '❓ Missing values',
+    format: '❌ Format errors',
+  },
+  sources: {
+    title: 'Data Sources',
+    empty: 'No connected sources',
+    records: 'records',
+  },
+},
 };
 
 export default en;

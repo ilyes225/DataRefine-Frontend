@@ -24,4 +24,7 @@ export const anomaliesAPI = {
   // Changer le statut
   updateStatus: (id, status) =>
     apiClient.put(`/anomalies/${id}/status`, { status }),
+
+getHistory: (sourceId = null) =>
+  apiClient.get('/anomalies/history', { params: sourceId ? { source_id: sourceId } : {} }),
 };

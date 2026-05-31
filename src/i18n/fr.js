@@ -1,5 +1,4 @@
 const fr = {
-  // ── SIDEBAR ──────────────────────────────────────────────────────
   sidebar: {
     dashboard: 'Dashboard',
     anomalies: 'Anomalies',
@@ -7,17 +6,14 @@ const fr = {
     sources: 'Sources',
     reports: 'Rapports',
     settings: 'Paramètres',
+    userManagement: 'Utilisateurs',
   },
-
-  // ── NAVBAR ───────────────────────────────────────────────────────
   navbar: {
     title: 'DataRefine',
     subtitle: 'Plateforme de Détection & Correction',
     lightMode: 'Mode clair',
     darkMode: 'Mode nuit',
   },
-
-  // ── LOGIN ────────────────────────────────────────────────────────
   login: {
     title: 'DataRefine',
     subtitle: 'Connectez-vous à votre compte',
@@ -53,10 +49,27 @@ const fr = {
     devTokenLabel: '🔑 Token généré (mode développement) :',
     devTokenCopy: '📋 Copier',
   },
-
-  // ── DASHBOARD ────────────────────────────────────────────────────
   dashboard: {
     title: 'Dashboard',
+    hello: 'Bonjour',
+    newSource: 'Nouvelle Source',
+    trendTitle: 'Évolution des détections',
+    trendDays: '7 derniers jours',
+    trendEmpty: 'Aucune détection ces 7 derniers jours',
+    trendLaunch: 'Lancer une analyse',
+    seeAll: 'Voir tout',
+    pendingCorrections: 'Corrections en attente',
+    allDone: 'Tout est traité !',
+    allDoneSub: (n) => `${n} corrections approuvées`,
+    moreCorrections: (n) => `+ ${n} autres corrections →`,
+    mlBannerTitle: 'Prêt à analyser vos données ?',
+    mlBannerSub: 'Votre modèle ML est en veille. Sélectionnez une source et lancez une détection automatique des anomalies.',
+    mlBannerBtn: "Lancer l'analyse",
+    loadingText: 'Chargement du tableau de bord…',
+    excellent: 'Excellent',
+    average: 'Moyen',
+    critical: 'Critique',
+    linesCount: 'lignes',
     kpi: {
       anomalies: 'Total Anomalies',
       anomaliesSub: 'Détectées automatiquement',
@@ -80,11 +93,14 @@ const fr = {
       records: 'enregistrements',
     },
   },
-
-  // ── ANOMALIES ────────────────────────────────────────────────────
   anomalies: {
     title: 'Anomalies Détectées',
     refresh: '🔄 Actualiser',
+    analyze: "Lancer l'analyse",     
+    analyzing: 'Analyse en cours…',
+    analyzeSuccess: 'Analyse terminée avec succès.',
+    selectSourceFirst: 'Veuillez sélectionner une source d\'abord.',
+    analyzeFailed: 'Échec de l\'analyse. Veuillez réessayer.',
     total: 'anomalie(s) au total',
     empty: 'Aucune anomalie trouvée',
     filters: {
@@ -94,6 +110,8 @@ const fr = {
       pending: 'En attente',
       approved: 'Approuvés',
       rejected: 'Rejetés',
+      sourceLabel: 'Source',
+      
     },
     types: {
       duplicate: 'Doublon',
@@ -141,11 +159,11 @@ const fr = {
       format: 'Format',
     },
   },
-
-  // ── CORRECTIONS ──────────────────────────────────────────────────
   corrections: {
     title: 'Corrections',
     refresh: '🔄 Actualiser',
+    total: 'corrections',
+
     export: {
       title: '⬇️ Télécharger le fichier corrigé',
       onlyApproved: 'Seuls les datasets avec des corrections approuvées sont disponibles.',
@@ -203,6 +221,13 @@ const fr = {
       phone_normalize: 'Normalisation téléphone',
       date_normalize: 'Normalisation date',
       isolation_forest_median: 'Isolation Forest (médiane)',
+      iqr_median: 'Médiane IQR',
+      unrecoverable_email: 'Email irrécupérable',
+      phone_normalization: 'Normalisation téléphone',
+      median_imputation: 'Imputation par médiane',
+      mode_imputation: 'Imputation par mode',
+
+
     },
     modal: {
       title: '✏️ Correction manuelle',
@@ -218,8 +243,6 @@ const fr = {
       loading: '⏳ Mise à jour...',
     },
   },
-
-  // ── SOURCES ──────────────────────────────────────────────────────
   sources: {
     title: 'Sources de Données',
     tabs: {
@@ -297,8 +320,6 @@ const fr = {
       dbAnalyzed: (n, a) => `✅ ${n} enregistrements importés — ${a} anomalies détectées !`,
     },
   },
-
-  // ── REPORTS ──────────────────────────────────────────────────────
   reports: {
     title: 'Rapports',
     subtitle: 'Résumé global des KPIs du système',
@@ -319,6 +340,7 @@ const fr = {
       pending: 'En attente',
       resolved: 'Résolues',
       byType: 'Répartition par type :',
+
     },
     correctionStats: {
       total: 'Total',
@@ -333,8 +355,6 @@ const fr = {
       format: 'Erreurs de format',
     },
   },
-
-  // ── SETTINGS ─────────────────────────────────────────────────────
   settings: {
     title: '⚙️ Paramètres ML',
     subtitle: "Configurez les seuils et options des modules de détection d'anomalies",
@@ -395,14 +415,110 @@ const fr = {
       errorDelete: 'Erreur lors de la suppression du compte.',
     },
   },
-
-  // ── COMMON ───────────────────────────────────────────────────────
   common: {
     status: {
       active: 'Actif',
       inactive: 'Inactif',
     },
     loading: 'Chargement...',
+  },
+  notifications: {
+    title: 'Notifications',
+    markAllRead: 'Tout marquer lu',
+    clear: 'Vider',
+    empty: 'Aucune notification',
+    filters: {
+      all: 'Toutes',
+      unread: 'Non lues',
+      anomalies: 'Anomalies',
+      ml: 'Analyse ML',
+    },
+  },
+users: {
+    title: 'Gestion des utilisateurs',
+    subtitle: 'Gérez les rôles, projets et imports de chaque utilisateur',
+    refresh: 'Actualiser',
+    tabs: {
+      users: 'Utilisateurs',
+      clients: 'Projets',
+    },
+    table: {
+      username: 'Nom',
+      email: 'Email',
+      role: 'Rôle',
+      status: 'Statut',
+      clients: 'Projets',
+      actions: 'Actions',
+    },
+    roles: {
+      admin: 'Admin',
+      consultant: 'Consultant',
+    },
+    actions: {
+      promote: 'Promouvoir',
+      demote: 'Rétrograder',
+      you: 'vous',
+    },
+    projects: {
+      title: 'Projets',
+      newClient: 'Nouveau projet',
+      createTitle: 'Créer un nouveau projet',
+      nameLabel: 'Nom du projet',
+      namePlaceholder: 'ex: EDF Data Q1',
+      domainLabel: 'Domaine',
+      domainPlaceholder: 'ex: edf.fr',
+      createButton: 'Créer',
+      creating: 'Création...',
+      cancel: 'Annuler',
+      members: 'Membres',
+      assignPlaceholder: 'Assigner un consultant...',
+      assignButton: 'Assigner',
+      noMembers: 'Aucun consultant assigné',
+      deleteConfirm: (name) => `Supprimer le projet "${name}" ? Tous les consultants seront désassignés.`,
+      unassignConfirm: (name) => `Retirer ${name} de ce projet ?`,
+      assigned: (n) => `${n} consultant${n > 1 ? 's' : ''} assigné${n > 1 ? 's' : ''}`,
+    },
+  },
+  pending: {
+    title: "En attente d'assignation",
+    subtitle: "Votre compte a été créé et vérifié. Veuillez attendre qu'un administrateur vous assigne à un projet.",
+    hint: 'Si vous attendez depuis trop longtemps, contactez votre administrateur.',
+    logout: 'Se déconnecter',
+  },
+  register: {
+    title: 'Créer votre compte',
+    subtitle: "Rejoignez DataRefine aujourd'hui",
+    username: "NOM D'UTILISATEUR",
+    email: 'EMAIL',
+    password: 'MOT DE PASSE',
+    usernamePlaceholder: 'johndoe',
+    emailPlaceholder: 'john@exemple.com',
+    passwordPlaceholder: '••••••••',
+    submit: 'Créer le compte',
+    loading: 'Création en cours…',
+    alreadyAccount: 'Déjà un compte ?',
+    login: 'Se connecter',
+    errorDefault: "Échec de l'inscription",
+    successTitle: 'Vérifiez votre email',
+    successText: 'Un email de vérification a été envoyé à',
+    successText2: "Cliquez sur le lien dans l'email pour activer votre compte.",
+    goToLogin: 'Aller au Login',
+  },
+  verifyEmail: {
+    loadingTitle: 'Vérification en cours',
+    loadingSubtitle: 'Validation de votre email…',
+    successTitle: 'Email vérifié',
+    successText: 'Votre compte est activé. Vous pouvez maintenant vous connecter.',
+    successButton: 'Se connecter',
+    errorTitle: 'Échec de la vérification',
+    errorTokenMissing: 'Token manquant.',
+    errorDefault: 'Erreur de vérification.',
+    retryButton: 'Réessayer',
+  },
+  teamPanel: {
+    title: 'Mon équipe',
+    empty: 'Aucune équipe assignée',
+    onlyMember: 'Vous êtes le seul membre',
   },
 };
 

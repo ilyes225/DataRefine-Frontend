@@ -26,7 +26,7 @@ export function I18nProvider({ children }) {
   };
 
   return (
-    <I18nContext.Provider value={{ t, lang, switchLang }}>
+    <I18nContext.Provider value={{ t, lang, switchLang, language: lang, setLanguage: switchLang }}>
       {children}
     </I18nContext.Provider>
   );
